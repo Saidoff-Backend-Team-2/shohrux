@@ -23,6 +23,7 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     'common',
     'company',
+    'product',
 ]
 THIRD_PARTY_APPS = [
     'phonenumber_field',
