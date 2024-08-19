@@ -7,7 +7,7 @@ env = environ.Env(
 )
 environ.Env.read_env('.env')
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 ALLOWED_HOSTS = list(env("ALLOWED_HOSTS").split(','))
@@ -25,6 +25,7 @@ LOCAL_APPS = [
     'company',
 ]
 THIRD_PARTY_APPS = [
+    'phonenumber_field',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -95,6 +96,12 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR.joinpath('staticfiles'),
+    ]
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
