@@ -1,9 +1,11 @@
+from random import choices
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractUser
 from rest_framework_simplejwt.tokens import RefreshToken
-
+from django.conf import settings
 
 class CustomUser(AbstractUser):
     class UserType(models.TextChoices):
@@ -24,6 +26,7 @@ class CustomUser(AbstractUser):
     telegram_id = models.CharField(_('telegram id'), max_length=255, unique=True, blank=True, null=True)
     telegram_username = models.CharField(_('telegram username'), max_length=255, unique=True, blank=True, null=True)
     company_name = models.CharField(_('company name'), max_length=255, null=True, blank=True)
+    bot_lang = models.CharField(max_length=10, choices=settings.LANGUAGES, blank=True, null=True)
 
     def __str__(self):
         return self.full_name
