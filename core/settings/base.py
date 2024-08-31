@@ -1,12 +1,12 @@
 from pathlib import Path
 import environ
-
+from django.utils.translation import gettext_lazy as _
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True)
 )
 environ.Env.read_env('.env')
-
+AUTH_USER_MODEL = 'account.CustomUser'
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
@@ -24,9 +24,12 @@ LOCAL_APPS = [
     'common',
     'company',
     'product',
+    'order',
+    'account',
 ]
 THIRD_PARTY_APPS = [
     'phonenumber_field',
+    'rest_framework',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -95,6 +98,11 @@ TIME_ZONE = 'Asia/Tashkent'
 USE_I18N = True
 
 USE_TZ = True
+
+LANGUAGES = (
+    ('uz', _('Uzbek')),
+    ('ru', _('Russian'))
+)
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'

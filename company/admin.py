@@ -6,10 +6,14 @@ from .models import *
 class BannerAdmin(admin.ModelAdmin):
     pass
 
+class AboutUsGalleryInline(admin.StackedInline):
+    model = AboutUsGallery
+    extra = 2
 
 @admin.register(AboutUs)
 class AboutUsAdmin(admin.ModelAdmin):
-    pass
+    inlines = [AboutUsGalleryInline]
+
 
 
 @admin.register(AboutUsGallery)
